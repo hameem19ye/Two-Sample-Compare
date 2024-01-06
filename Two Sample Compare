@@ -1,0 +1,38 @@
+Two Sample Compare: İstatistiksel Analizde Derinlemesine Bir Bakış
+Python ile İstatistiksel Analize Giriş
+Veri analizi dünyasında, iki örneğin karşılaştırılması, benzerliklerini ve farklılıklarını anlamak açısından büyük önem taşır. Bu blogda, Python kullanarak "Two Sample Compare"  konseptini ele alacağız. Bu konuya, incelediğim bir Jupyter Notebook'tan esinlenerek yaklaşacağız. Bu notebook, istatistiksel örnekleme ve karşılaştırmanın temellerini anlamak için mükemmel bir temel sağlıyor.
+Bir Örneklem Popülasyonu Oluşturmak
+Herhangi bir istatistiksel analizin ilk adımı, veri setinizi oluşturmaktır. Sağlanan notebook, veri manipülasyonu ve görselleştirmede Python'un temel taşları olan random, numpy ve matplotlib.pyplot gibi kütüphaneleri içe aktararak başlar.
+Kod, Gauss dağılımı kullanarak bir popülasyon oluşturarak devam eder. İşte bu işlevin basitleştirilmiş bir versiyonu:
+
+###
+def generate_population_with_size_mean_and_sd(size=10000, mean=50, SD=15): numbers = [random.gauss(mean, SD) for _ in range(size)] return numbers 
+
+Bu fonksiyon, ortalama (mean) ve standart sapma (SD) ile tanımlanan normal bir dağılımı takip eden bir sayılar listesi (numbers) oluşturur.
+Popülasyondan Örnek Alma
+Popülasyonumuz hazır olduğunda, bir sonraki adım örnekleri çekmektir. Notebook, belirtilen büyüklükteki bir popülasyondan örnek çıkarmak için bir fonksiyon içerir:
+
+###
+def get_sample_from_a_population(size=100, pop_1=[]): sample = random.choices(pop_1, k=size) return sample 
+
+Bu fonksiyon, analiz için bir örnek oluşturmak üzere popülasyonumuzdan rastgele birkaç öğe seçmemize olanak tanır.
+İstatistiksel Karşılaştırma
+Örneklerimiz hazır olduğunda, onları karşılaştırma zamanı gelir. Karşılaştırma genellikle ortalama ve standart sapma gibi temel istatistiksel metrikler etrafında döner. Notebook'ta, bu metrikleri hesaplayan bir get_sample_statistics fonksiyonu bulunmaktadır:
+
+###
+def get_sample_statistics(sample_1): return np.mean(sample_1), np.std(sample_1), len(sample_1) 
+
+İki örneği karşılaştırırken, genellikle ortalamalarının önemli ölçüde farklı olup olmadığını bilmek isteriz. Bu genellikle bir t-testi kullanılarak yapılır, bu doğrudan notebook'ta gösterilmese de analizin mantıklı bir sonraki adımıdır.
+Verileri Görselleştirmek
+Verileri görselleştirmek, iki örneğin benzerliklerini ve farklılıklarını anlamak için güçlü bir araçtır. Notebook, doğrudan görselleştirme kodu içermese de, matplotlib kullanarak örnekleri kolaylıkla çizebiliriz. Örneğin:
+
+###
+plt.hist(sample_1, bins=50, alpha=0.5, label='Örnek 1') plt.hist(sample_2, bins=50, alpha=0.5, label='Örnek 2') plt.legend(loc='upper right') plt.show() 
+
+Bu kod, iki örneğimizin dağılımlarını görsel olarak incelememize olanak tanıyan bir histogram oluşturacaktır.
+
+
+Sonuç
+"Two Sample Compare" konusu, iki örnek oluşturmak ve karşılaştırmak için sağlam bir çerçeve sunar. Pratikte, bu tür analizler bilimsel araştırmadan pazar analizine kadar çeşitli alanlarda uygulanabilir. Örnekler oluşturma, örnekleri çekme ve bu örnekleri karşılaştırma temel kavramlarını anlayarak veri analizi olasılıklarının bir dünyasını açarız.
+Etkili istatistiksel analizin anahtarı, sadece bu testleri yapabilme yeteneği değil, aynı zamanda ne zaman ve nasıl uygulanacağını anlama yeteneğidir. Gördüğümüz gibi, Python ve kütüphaneleri bu amaçlar için esnek ve güçlü bir araç seti sunar. Analize mutlu devam edin!
+
